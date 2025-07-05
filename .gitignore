@@ -1,0 +1,7 @@
+# .gitignore (typical for web projects)
+node_modules/
+.DS_Store
+*.log
+.env
+dist/
+.cache/
