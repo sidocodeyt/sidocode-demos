@@ -1,0 +1,37 @@
+name: Update Project Table
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * 0'  # Runs every Sunday at midnight
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Generate README
+        run: |
+          echo "# 🎬 Sidocode Demos" > README.md
+          echo "**Source code for my YouTube tutorials**\n" >> README.md
+          echo "| Code  | Project | Live Demo | Tutorial |" >> README.md
+          echo "|-------|---------|-----------|----------|" >> README.md
+          
+          # Dynamically add projects
+          for dir in code-*/; do
+            CODE_NUM=$(echo $dir | grep -o '[0-9]\+')
+            PROJECT_NAME=$(cat ${dir}README.md | grep -m1 '# ' | cut -d'|' -f1 | sed 's/# //g')
+            YT_URL=$(cat ${dir}README.md | grep 'Tutorial' | grep -o 'https://[^)]*')
+            DEMO_URL="https://sidocodeyt.github.io/sidocode-demos/${dir%/}/"
+            
+            echo "| #$CODE_NUM | $PROJECT_NAME | [🌎 Demo]($DEMO_URL) | [🎥 Watch]($YT_URL) |" >> README.md
+          done
+          
+      - name: Commit Changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add README.md
+          git commit -m "Auto-update project table" || exit 0
+          git push
