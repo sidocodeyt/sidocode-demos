@@ -1,0 +1,115 @@
+/* === GLOBAL RESET =============================================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* === PAGE BACKGROUND & CENTRING ================================= */
+body{
+  font-family:Arial, sans-serif;
+  display:flex;                     /* centres the game container   */
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  background:#f0f0f0;
+}
+
+/* === OUTER WRAPPER ============================================== */
+#game-container{
+  position:relative;                /* keeps child elements anchored */
+  width:300px;                      /* same width as the board       */
+}
+
+/* === MAIN PLAY AREA ============================================= */
+#game-board{
+  width:300px;
+  height:500px;
+  border:2px solid #333;
+  border-radius:10px;
+  background:#e8f4f8;               /* pale blue “sky”               */
+  box-shadow:0 4px 8px rgba(0,0,0,0.1);
+  overflow:hidden;                  /* hides the obstacle until it   */
+  position:relative;                /* enters the visible field      */
+  pointer-events:none;              /* ← optional: see note (2)      */
+}
+
+/* === PLAYER (red block the user moves) ========================== */
+#player-character{
+  position:absolute;
+  bottom:150px;                     /* sits on top of the green land */
+  left:10px;                        /* starts in the left‑most lane  */
+  width:80px;
+  height:80px;
+  background:#ff5252;
+  border-radius:8px;
+  transition:left 0.2s ease;        /* smooth lane change            */
+}
+
+/* === FALLING OBSTACLE (black block) ============================= */
+#falling-obstacle{
+  position:absolute;
+  top:-80px;                        /* begins just above the board   */
+  left:10px;                        /* lane position is updated in JS*/
+  width:80px;
+  height:80px;
+  background:#333;
+  border-radius:8px;
+}
+
+/* === GREEN “GROUND” STRIP ====================================== */
+#ground{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:150px;
+  background:#4CAF50;
+}
+
+/* === TOUCH AREAS FOR MOBILE CONTROLS ============================ */
+#left-touch-area,
+#right-touch-area{
+  position:absolute;
+  top:0;
+  height:100%;
+  width:50%;                        /* each covers half the board    */
+  z-index:10;                       /* sit above the board           */
+}
+
+#left-touch-area{  left :0; }       /* ← tweak (1)                   */
+#right-touch-area{ right:0; }
+
+/* === START / RESTART OVERLAY ==================================== */
+#start-screen{
+  position:absolute;
+  inset:0;                          /* shorthand for top/right/bottom/left:0 */
+  background:rgba(0,0,0,0.7);
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  z-index:20;                       /* highest so it sits on top     */
+  border-radius:8px;
+}
+
+#start-screen h2{ margin-bottom:10px; font-size:24px; }
+
+/* === SCORE READ‑OUT ============================================= */
+#score-display{
+  position:absolute;
+  top:-40px;                        /* sits just above the board     */
+  left:0;
+  width:100%;
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+}
+
+/* === (OPTIONAL) MOVE ANIMATION INTO CSS =========================
+@keyframes fall{
+  0%{ top:-80px; }
+  100%{ top:500px; }
+}
+================================================================== */
