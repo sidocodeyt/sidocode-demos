@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code #104: Ready-to-Use Glitch Effect Banner</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header banner with configurable options -->
+    <div
+      class="header-banner"
+      data-glitch-image="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
+      data-glitch-fit="cover"
+      data-glitch-intensity="medium"
+    >
+      <canvas class="pixi"></canvas>
+      <div class="banner-content">
+        <h1>Welcome to the Future</h1>
+        <p>Experience cutting-edge design</p>
+        <a href="#signup" class="cta-button">Join Now</a>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div
+      class="content"
+      style="padding: 2rem; max-width: 1200px; margin: 0 auto"
+    >
+      <h2>Page Content</h2>
+      <p>This appears below the glitch header banner...</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.3.3/pixi.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-filters@3.0.3/dist/pixi-filters.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
